@@ -31,7 +31,10 @@ function getExplore (name) {
                 result.explore.push(exploreItem);
             });
 
-            console.log(result);
+            resolve({
+                code: 1,
+                message: result
+            });
         })
     });
 }

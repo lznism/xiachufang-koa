@@ -1,0 +1,30 @@
+const cheerio = require('cheerio');
+const superagent = require('superagent');
+const url = require('../config/url');
+
+function getRecipeList(id) {
+    let result = {
+        title: '',
+        from: '',
+        subtitle: '',
+        recipeList: []
+    };
+    return new Promise((resolve, reject) => {
+        superagent.get(url.recipeListUrl + id + '/')
+        .set('User-Agent', 'Mozilla/5.0')
+        .set('Referer', 'https://www.cnblogs.com/guolizhi')
+        .end((err, response) => {
+            if (err) {
+                resolve({
+                    code: -404,
+                    message: '网络异常，请稍后重试'
+                });
+            }
+            const $ = cheerio.load(response.text);
+            result.title = $('.basic').find('h1').text().trim();
+            result.from = $('span.author').text();
+            result.subtitle = $('.basic .desc').text();
+
+        });
+    });
+}
