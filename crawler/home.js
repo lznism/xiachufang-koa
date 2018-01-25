@@ -41,7 +41,10 @@ function getContent (classname) {
                     result.body.push(bodyItem);
                 });
 
-                resolve(result);
+                resolve({
+                    code: 1,
+                    message: result
+                });
             });
     })
 }
