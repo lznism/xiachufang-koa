@@ -1,6 +1,10 @@
 const Koa = require('koa');
-const app = Koa();
-const router = require('./routes/index');
+const Router = require('koa-router');
 
-app.use(router.routes());
+const router = require('./routes');
+const app = new Koa();
+const api = new Router();
+
+api.use('/api', router.routes(), router.allowedMethods());
+app.use(api.routes());
 app.listen(3000);

@@ -48,3 +48,5 @@ function getContent (classname) {
             });
     })
 }
+
+module.exports = getContent;

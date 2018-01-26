@@ -68,3 +68,5 @@ function getMenuItem(id) {
             });
     });
 }
+
+module.exports = getMenuItem;

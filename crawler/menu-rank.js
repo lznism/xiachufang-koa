@@ -39,4 +39,4 @@ function getExplore (name) {
     });
 }
 
-getExplore('rising');
+module.exports = getExplore;

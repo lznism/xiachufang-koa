@@ -44,3 +44,5 @@ function getRecipeList(id) {
         });
     });
 }
+
+module.exports = getRecipeList;
