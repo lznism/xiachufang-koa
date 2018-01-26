@@ -25,6 +25,22 @@ function getRecipeList(id) {
             result.from = $('span.author').text();
             result.subtitle = $('.basic .desc').text();
 
+            $('#add-more-container').children('article').each((index, item) => {
+                let recipeItem = {};
+                recipeItem['imgUrl'] = $(item).find('img').attr('src');
+                recipeItem['menuName'] = $(item).find('.recipe-name').text();
+                recipeItem['author'] = $(item).find('.author-name').text();
+                recipeItem['doneNum'] = $(item).find('.extra').text().trim();
+                recipeItem['avatar'] = $(item).find('.author').children('img').attr('src');
+                recipeItem['url'] = $(item).children('a').attr('href');
+
+                result.recipeList.push(recipeItem);
+            });
+
+            resolve({
+                code: 1,
+                message: result
+            });
         });
     });
 }
