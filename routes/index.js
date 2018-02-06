@@ -6,6 +6,7 @@ const getMenuItem = require('../crawler/menu-item');
 const getExplore = require('../crawler/menu-rank');
 const getRecipeList = require('../crawler/recipe-list');
 const getCategory = require('../crawler/category');
+const getCategoryItem = require('../crawler/category-item');
 
 // 获取首页菜谱榜单数据
 router.get('/home/:type', async (ctx, next) => {
@@ -46,6 +47,15 @@ router.get('/recipe_list/:id', async (ctx, next) => {
 // 获取菜谱分类数据
 router.get('/category', async (ctx, next) => {
     let data = await getCategory()
+        .then(res => res)
+        .catch(err => ({code: 0, message: '网络错误，请稍后重试'}));
+    ctx.body = data;
+});
+
+// 获取单条分类数据
+router.get('/category/:id', async (ctx, next) => {
+    let id = ctx.params.id;
+    let data = await getCategoryItem(id)
         .then(res => res)
         .catch(err => ({code: 0, message: '网络错误，请稍后重试'}));
     ctx.body = data;
