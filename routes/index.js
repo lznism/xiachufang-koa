@@ -61,4 +61,13 @@ router.get('/category/:id', async (ctx, next) => {
     ctx.body = data;
 });
 
+// 获取单条分类数据--最近流行
+router.get('/category/:id/recent', async (ctx, next) => {
+    let id = ctx.params.id;
+    let data = await getCategoryItem(id, '/recent')
+        .then(res => res)
+        .catch(err => ({code: 0, message: '网络错误，请稍后重试'}));
+    ctx.body = data;
+});
+
 module.exports = router;

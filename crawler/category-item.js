@@ -2,10 +2,10 @@ const superagent = require('superagent');
 const cheerio = require('cheerio');
 const url = require('../config/url');
 
-function getCategoryItem(id) {
+function getCategoryItem(id, recent = "/") {
     let result = [];
     return new Promise((resolve, reject) => {
-        superagent.get(`${url.categoryUrl}/${id}`)
+        superagent.get(`${url.categoryUrl}/${id}${recent}`)
             .set('User-Agent', 'Mozilla/5.0')
             .set('Referer', 'https://www.cnblogs.com/guolizhi')
             .end((err, response) => {
